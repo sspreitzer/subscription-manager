@@ -66,7 +66,7 @@ log = logging.getLogger('rhsm-app.' + __name__)
 
 cfg = rhsm.config.initConfig()
 
-ERR_NOT_REGISTERED_MSG = _("This system is not yet registered. Try 'subscription-manager register --help' for more information.")
+ERR_NOT_REGISTERED_MSG = _("This system is not yet registered. Try '%s' for more information.") % "subscription-manager register --help"
 ERR_NOT_REGISTERED_CODE = 1
 
 # Translates the cert sorter status constants:
@@ -371,7 +371,7 @@ class CliCommand(AbstractCLICommand):
 
         # TODO: For now, we disable the CLI entirely. We may want to allow some commands in the future.
         if rhsm.config.in_container():
-            system_exit(os.EX_CONFIG, _("subscription-manager is disabled when running inside a container. Please refer to your host system for subscription management.\n"))
+            system_exit(os.EX_CONFIG, _("%s is disabled when running inside a container. Please refer to your host system for subscription management.\n") % "subscription-manager")
 
         config_changed = False
 
@@ -1864,7 +1864,7 @@ class ImportCertCommand(CliCommand):
 
 class PluginsCommand(CliCommand):
     def __init__(self):
-        shortdesc = _("View and configure subscription-manager plugins")
+        shortdesc = _("View and configure %s plugins") % "subscription-manager"
         super(PluginsCommand, self).__init__("plugins", shortdesc, False)
 
         SM = "subscription-manager"
